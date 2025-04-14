@@ -1,4 +1,4 @@
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, make_response
 import math
 
 app = Flask(__name__)
@@ -25,7 +25,11 @@ def index():
     result = None
     error = None
     rate = None
-    current = win = lose = 0
+
+    # 기본값은 쿠키에서 불러옴
+    current = int(request.cookies.get("current", 0))
+    win = int(request.cookies.get("win", 0))
+    lose = int(request.cookies.get("lose", 0))
 
     if request.method == "POST":
         try:
@@ -58,7 +62,11 @@ def index():
         except:
             error = "숫자만 입력해주세요"
 
-    return render_template("index.html", result=result, error=error, rate=rate, current=current, win=win, lose=lose)
+    resp = make_response(render_template("index.html", result=result, error=error, rate=rate, current=current, win=win, lose=lose))
+    resp.set_cookie("current", str(current))
+    resp.set_cookie("win", str(win))
+    resp.set_cookie("lose", str(lose))
+    return resp
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
