@@ -9,6 +9,7 @@
       background-color: #f8f8f8;
       text-align: center;
       padding: 30px;
+      margin: 0;
     }
 
     .container {
@@ -23,6 +24,7 @@
     h1 {
       font-size: 28px;
       line-height: 1.5;
+      margin-bottom: 30px;
     }
 
     .input-row {
@@ -54,7 +56,7 @@
 
     .main-buttons button,
     .submit-button {
-      padding: 8px 20px;
+      padding: 10px 20px;
       font-size: 16px;
       border: none;
       border-radius: 5px;
@@ -82,39 +84,38 @@
       margin-top: 20px;
     }
 
+    /* ✅ 반응형 스타일 */
     @media screen and (max-width: 600px) {
-  .input-row {
-    flex-direction: column;
-    align-items: stretch;
-  }
+      .input-row {
+        flex-direction: column;
+        align-items: stretch;
+      }
 
-  .input-row label {
-    text-align: left;
-    margin-bottom: 5px;
-  }
+      .input-row label {
+        text-align: left;
+        margin-bottom: 5px;
+      }
 
-  .input-row input {
-    width: 100%;
-    font-size: 18px;
-  }
+      .input-row input {
+        width: 100%;
+        font-size: 18px;
+      }
 
-  .submit-button,
-  .main-buttons button {
-    width: 100%;
-    font-size: 18px;
-  }
+      .submit-button,
+      .main-buttons button {
+        width: 100%;
+        font-size: 18px;
+      }
 
-  .main-buttons {
-    flex-direction: column;
-    gap: 10px;
-  }
+      .main-buttons {
+        flex-direction: column;
+        gap: 10px;
+      }
 
-  .container {
-    padding: 20px;
-  }
-}
-
-
+      .container {
+        padding: 20px;
+      }
+    }
   </style>
 </head>
 <body>
@@ -156,4 +157,3 @@
   </div>
 </body>
 </html>
-
