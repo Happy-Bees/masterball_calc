@@ -97,11 +97,6 @@
       cursor: pointer;
     }
 
-    .error {
-      color: red;
-      margin-top: 20px;
-    }
-
     @media screen and (max-width: 600px) {
       .form-row {
         flex-direction: column;
@@ -125,14 +120,16 @@
   <div class="container">
     <h1>🎮 마스터볼까지 몇판? 🎮<br>🖩 계산기 🖩</h1>
 
-    {% if result %}
+    {% if result is not none %}
       <div class="result-box">
         마스터볼까지 대략 <strong>{{ result }}판</strong> 남았습니다!<br>
         (승률: {{ "%.2f"|format(rate) }}%)
       </div>
-    
     {% elif error %}
-      <div class="error">{{ error }}</div>
+      <div class="result-box">
+        <strong>{{ error }}</strong><br>
+        (승률: {{ "%.2f"|format(rate) }}%)
+      </div>
     {% endif %}
 
     <form method="POST">
