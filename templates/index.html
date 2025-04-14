@@ -3,41 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <title>마스터볼까지 몇판?</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
+        h1, h3 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input[type="number"] {
+            width: 100px;
+            padding: 5px;
+            margin: 0 10px 10px 0;
+        }
+        button {
+            padding: 6px 12px;
+            margin: 3px;
+            border: none;
+            border-radius: 6px;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .secondary-btn {
+            background-color: #2196F3;
+        }
+        .secondary-btn:hover {
+            background-color: #1976D2;
+        }
+    </style>
 </head>
 <body>
-    <h1>🎮 마스터볼까지 몇판? 계산기 🎮</h1>
-    <form method="POST">
-        <label>현재 포인트:</label>
-        <input type="number" name="current" value="{{ current }}" required>
-        <button type="submit" name="adjust" value="current-1">-</button>
-        <button type="submit" name="adjust" value="current+1">+</button><br>
+    <div class="container">
+        <h1>🎮 마스터볼까지 몇판? 계산기 🎮</h1>
+        <form method="POST">
+            <label>현재 포인트:</label>
+            <input type="number" name="current" value="{{ current }}" required>
+            <button type="submit" name="adjust" value="current-1">-</button>
+            <button type="submit" name="adjust" value="current+1">+</button>
 
-        <label>승리 판 수:</label>
-        <input type="number" name="win" value="{{ win }}" required>
-        <button type="submit" name="adjust" value="win-1">-</button>
-        <button type="submit" name="adjust" value="win+1">+</button><br>
+            <label>승리 판 수:</label>
+            <input type="number" name="win" value="{{ win }}" required>
+            <button type="submit" name="adjust" value="win-1">-</button>
+            <button type="submit" name="adjust" value="win+1">+</button>
 
-        <label>패배 판 수:</label>
-        <input type="number" name="lose" value="{{ lose }}" required>
-        <button type="submit" name="adjust" value="lose-1">-</button>
-        <button type="submit" name="adjust" value="lose+1">+</button><br><br>
+            <label>패배 판 수:</label>
+            <input type="number" name="lose" value="{{ lose }}" required>
+            <button type="submit" name="adjust" value="lose-1">-</button>
+            <button type="submit" name="adjust" value="lose+1">+</button>
 
-        <button type="submit">계산하기</button>
-    </form>
+            <br><br>
+            <button type="submit">계산하기</button>
+        </form>
 
-    {% if result %}
-        <h3>결과: {{ result }} 판 (승률: {{ rate | round(2) }}%)</h3>
-    {% elif error %}
-        <h3>{{ error }}</h3>
-    {% endif %}
+        {% if result %}
+            <h3>결과: {{ result }} 판 (승률: {{ rate | round(2) }}%)</h3>
+        {% elif error %}
+            <h3>{{ error }}</h3>
+        {% endif %}
 
-    <hr>
-    <form method="POST">
-        <input type="hidden" name="current" value="{{ current }}">
-        <input type="hidden" name="win" value="{{ win }}">
-        <input type="hidden" name="lose" value="{{ lose }}">
-        <button type="submit" name="adjust" value="win-btn">승리 버튼 (+10pt & 승+1)</button>
-        <button type="submit" name="adjust" value="lose-btn">패배 버튼 (-7pt & 패+1)</button>
-    </form>
+        <hr>
+        <form method="POST">
+            <input type="hidden" name="current" value="{{ current }}">
+            <input type="hidden" name="win" value="{{ win }}">
+            <input type="hidden" name="lose" value="{{ lose }}">
+            <button class="secondary-btn" type="submit" name="adjust" value="win-btn">승리 추가 (+10pt & 승+1)</button>
+            <button class="secondary-btn" type="submit" name="adjust" value="lose-btn">패배 추가 (-7pt & 패+1)</button>
+        </form>
+    </div>
 </body>
 </html>
