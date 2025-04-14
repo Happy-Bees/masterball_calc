@@ -6,33 +6,37 @@
     <style>
         body {
             font-family: 'Segoe UI', sans-serif;
-            background-color: #f7f7f7;
+            background: url("{{ url_for('static', filename='rounded_natural_image.png') }}") no-repeat center center fixed;
+            background-size: cover;
+            backdrop-filter: blur(4px);
+            margin: 0;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
-            background: white;
+            background: rgba(255, 255, 255, 0.9);
             padding: 30px;
             border-radius: 12px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
             width: 400px;
-        }
-        h1, h3 {
             text-align: center;
+        }
+        h1, h2, h3 {
+            margin: 10px 0;
         }
         form {
             margin-bottom: 20px;
         }
-        label {
+        label, input, button {
             display: block;
-            margin-top: 15px;
+            margin: 0 auto 10px auto;
         }
         input[type="number"] {
             width: 100px;
             padding: 5px;
-            margin: 0 10px 10px 0;
         }
         button {
             padding: 6px 12px;
@@ -56,7 +60,7 @@
 </head>
 <body>
     <div class="container">
-        <h1>🎮 마스터볼까지 몇판? 계산기 🎮</h1>
+        <h1>🎮 마스터볼까지 몇판? 🎮<br>🖩 계산기 🖩</h1>
         <form method="POST">
             <label>현재 포인트:</label>
             <input type="number" name="current" value="{{ current }}" required>
@@ -73,12 +77,13 @@
             <button type="submit" name="adjust" value="lose-1">-</button>
             <button type="submit" name="adjust" value="lose+1">+</button>
 
-            <br><br>
+            <br>
             <button type="submit">계산하기</button>
         </form>
 
         {% if result %}
-            <h3>결과: {{ result }} 판 (승률: {{ rate | round(2) }}%)</h3>
+            <h2>마스터볼까지의 기대 판 수</h2>
+            <h3>{{ result }} 판 (승률: {{ rate | round(2) }}%)</h3>
         {% elif error %}
             <h3>{{ error }}</h3>
         {% endif %}
