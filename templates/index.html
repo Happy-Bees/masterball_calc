@@ -1,135 +1,150 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <title>마스터볼까지 몇판?</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', sans-serif;
-            background-color: #f7f7f7;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
-        }
-        h1, h2, h3 {
-            margin: 10px 0;
-        }
-        form {
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-top: 20px;
-            font-weight: bold;
-        }
-        .input-block {
-            margin-bottom: 15px;
-        }
-        input[type="number"] {
-            width: 100px;
-            padding: 5px;
-            margin-bottom: 5px;
-        }
-        .arrow-controls {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        .arrow-btn {
-            font-size: 14px;
-            width: 30px;
-            height: 30px;
-            margin: 2px;
-            border: none;
-            border-radius: 4px;
-            background-color: #4CAF50;
-            color: white;
-            cursor: pointer;
-        }
-        .arrow-btn:hover {
-            background-color: #45a049;
-        }
-        .secondary-btn {
-            background-color: #2196F3;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 6px;
-            color: white;
-            cursor: pointer;
-            margin: 5px;
-        }
-        .secondary-btn:hover {
-            background-color: #1976D2;
-        }
-        .inline-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>마스터볼까지 몇판? 계산기</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background-color: #f8f8f8;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .container {
+      background-color: white;
+      border-radius: 12px;
+      padding: 40px;
+      max-width: 500px;
+      margin: auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      font-size: 28px;
+      line-height: 1.5;
+    }
+
+    .input-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 15px 0;
+      gap: 10px;
+    }
+
+    .input-row label {
+      font-weight: bold;
+      min-width: 90px;
+    }
+
+    .input-row input {
+      padding: 8px;
+      width: 100px;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .button-group button,
+    .main-buttons button {
+      padding: 6px 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    .main-buttons {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .main-buttons button {
+      background-color: #2196F3;
+    }
+
+    .submit-button {
+      margin-top: 20px;
+      padding: 8px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 30px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    .error {
+      color: red;
+      margin-top: 20px;
+    }
+
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>🎮 마스터볼까지 몇판? 🎮<br>🖩 계산기 🖩</h1>
-        <form method="POST">
-            <div class="input-block">
-                <label>현재 포인트</label>
-                <input type="number" name="current" value="{{ current }}" required>
-                <div class="arrow-controls">
-                    <button class="arrow-btn" type="submit" name="adjust" value="current-1">▲</button>
-                    <button class="arrow-btn" type="submit" name="adjust" value="current+1">▼</button>
-                </div>
-            </div>
+  <div class="container">
+    <h1>🎮 마스터볼까지 몇판? 🎮<br>🖩 계산기 🖩</h1>
 
-            <div class="input-block">
-                <label>승리 판 수</label>
-                <input type="number" name="win" value="{{ win }}" required>
-                <div class="arrow-controls">
-                    <button class="arrow-btn" type="submit" name="adjust" value="win-1">▲</button>
-                    <button class="arrow-btn" type="submit" name="adjust" value="win+1">▼</button>
-                </div>
-            </div>
+    <form method="POST">
+      <div class="input-row">
+        <label>현재 포인트</label>
+        <input type="number" name="current" value="{{ current }}">
+        <div class="button-group">
+          <button name="adjust" value="current+1">▲</button>
+          <button name="adjust" value="current-1">▼</button>
+        </div>
+      </div>
 
-            <div class="input-block">
-                <label>패배 판 수</label>
-                <input type="number" name="lose" value="{{ lose }}" required>
-                <div class="arrow-controls">
-                    <button class="arrow-btn" type="submit" name="adjust" value="lose-1">▲</button>
-                    <button class="arrow-btn" type="submit" name="adjust" value="lose+1">▼</button>
-                </div>
-            </div>
+      <div class="input-row">
+        <label>승리 판 수</label>
+        <input type="number" name="win" value="{{ win }}">
+        <div class="button-group">
+          <button name="adjust" value="win+1">▲</button>
+          <button name="adjust" value="win-1">▼</button>
+        </div>
+      </div>
 
-            <button type="submit">계산하기</button>
-        </form>
+      <div class="input-row">
+        <label>패배 판 수</label>
+        <input type="number" name="lose" value="{{ lose }}">
+        <div class="button-group">
+          <button name="adjust" value="lose+1">▲</button>
+          <button name="adjust" value="lose-1">▼</button>
+        </div>
+      </div>
 
-        {% if result %}
-            <h2>마스터볼까지의 기대 판 수</h2>
-            <h3>{{ result }} 판 (승률: {{ rate | round(2) }}%)</h3>
-        {% elif error %}
-            <h3>{{ error }}</h3>
-        {% endif %}
+      <button class="submit-button" type="submit">계산하기</button>
 
-        <hr>
-        <form method="POST" class="inline-buttons">
-            <input type="hidden" name="current" value="{{ current }}">
-            <input type="hidden" name="win" value="{{ win }}">
-            <input type="hidden" name="lose" value="{{ lose }}">
-            <button class="secondary-btn" type="submit" name="adjust" value="win-btn">승리 추가 (+10pt & 승+1)</button>
-            <button class="secondary-btn" type="submit" name="adjust" value="lose-btn">패배 추가 (-7pt & 패+1)</button>
-        </form>
-    </div>
+      <div class="main-buttons">
+        <button name="adjust" value="win-btn">승리 추가 (+10pt & 승+1)</button>
+        <button name="adjust" value="lose-btn">패배 추가 (-7pt & 패+1)</button>
+      </div>
+    </form>
+
+    {% if result %}
+      <div class="result">
+        마스터볼까지의 기대 판 수: {{ result }}판<br>
+        (승률: {{ "%.2f"|format(rate) }}%)
+      </div>
+    {% elif error %}
+      <div class="error">{{ error }}</div>
+    {% endif %}
+  </div>
 </body>
 </html>
