@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>마스터볼까지 몇판?</title>
+</head>
+<body>
+    <h1>🎮 마스터볼까지 몇판? 계산기 🎮</h1>
+    <form method="POST">
+        <label>현재 포인트:</label>
+        <input type="number" name="current" required><br>
+        <label>승리 판 수:</label>
+        <input type="number" name="win" required><br>
+        <label>패배 판 수:</label>
+        <input type="number" name="lose" required><br>
+        <button type="submit">계산하기</button>
+    </form>
+
+    {% if result %}
+        <h3>결과: {{ result }} 판</h3>
+    {% endif %}
+</body>
+</html>
