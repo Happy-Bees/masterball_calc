@@ -8,16 +8,36 @@
     <h1>🎮 마스터볼까지 몇판? 계산기 🎮</h1>
     <form method="POST">
         <label>현재 포인트:</label>
-        <input type="number" name="current" required><br>
+        <input type="number" name="current" value="{{ current }}" required>
+        <button type="submit" name="adjust" value="current-1">-</button>
+        <button type="submit" name="adjust" value="current+1">+</button><br>
+
         <label>승리 판 수:</label>
-        <input type="number" name="win" required><br>
+        <input type="number" name="win" value="{{ win }}" required>
+        <button type="submit" name="adjust" value="win-1">-</button>
+        <button type="submit" name="adjust" value="win+1">+</button><br>
+
         <label>패배 판 수:</label>
-        <input type="number" name="lose" required><br>
+        <input type="number" name="lose" value="{{ lose }}" required>
+        <button type="submit" name="adjust" value="lose-1">-</button>
+        <button type="submit" name="adjust" value="lose+1">+</button><br><br>
+
         <button type="submit">계산하기</button>
     </form>
 
     {% if result %}
-        <h3>결과: {{ result }} 판</h3>
+        <h3>결과: {{ result }} 판 (승률: {{ rate | round(2) }}%)</h3>
+    {% elif error %}
+        <h3>{{ error }}</h3>
     {% endif %}
+
+    <hr>
+    <form method="POST">
+        <input type="hidden" name="current" value="{{ current }}">
+        <input type="hidden" name="win" value="{{ win }}">
+        <input type="hidden" name="lose" value="{{ lose }}">
+        <button type="submit" name="adjust" value="win-btn">승리 버튼 (+10pt & 승+1)</button>
+        <button type="submit" name="adjust" value="lose-btn">패배 버튼 (-7pt & 패+1)</button>
+    </form>
 </body>
 </html>
