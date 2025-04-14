@@ -11,6 +11,10 @@ def calculate_expected_matches(current_point, win_count, lose_count):
         return None, "승리&패배 판수를 하나 이상 입력해주세요.", 0.0
 
     win_rate = win_count / total_games
+
+    if current_point >= target_point:
+        return None, "이미 마스터볼 티어시네요! 😉", win_rate * 100
+    
     diff = target_point - current_point
     expected_point_per_game = 10 * win_rate - 7 * (1 - win_rate)
 
